@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Src/">
+    <Project Path="Src/GrafanaWebApi80/GrafanaWebApi80.csproj" />
+    <Project Path="Src/GrafanaWebApi90/GrafanaWebApi90.csproj" />
+    <Project Path="Src/GrafanaWebApiShare/GrafanaWebApiShare.shproj" />
+  </Folder>
+  <Folder Name="/Test/">
+    <Project Path="Test/GrafanaWebApiUnitTest80/GrafanaWebApiUnitTest80.csproj" Id="a8bbbcca-a7fc-4dcc-97b7-ba5482e02e39" />
+    <Project Path="Test/GrafanaWebApiUnitTest90/GrafanaWebApiUnitTest90.csproj" Id="711010d3-406e-4988-b9e4-4e7ec46102b9" />
+    <Project Path="Test/GrafanaWebApiUnitTestShare/GrafanaWebApiUnitTestShare.shproj" Id="c5d48cba-042d-4dca-a136-a99f0172f69d" />
+  </Folder>
+</Solution>
