@@ -1,4 +1,4 @@
-﻿namespace GrafanaWebApi.Service.Model;
+﻿namespace GrafanaWebApi.Model;
 
 [JsonSourceGenerationOptions(
     JsonSerializerDefaults.Web,

@@ -6,5 +6,4 @@ global using System.Text;
 global using WebServiceClient;
 global using WebServiceClient.Store;
 
-global using GrafanaWebApi.Service;
-global using GrafanaWebApi.Service.Model;
+global using GrafanaWebApi.Model;
