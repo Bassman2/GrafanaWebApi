@@ -18,8 +18,12 @@
     <IsAotCompatible>True</IsAotCompatible>
   </PropertyGroup>
 
-  <Import Project="..\GrafanaWebApiShare\GrafanaWebApiShare.projitems" Label="Shared" />
+  <Import Project="..\GrafanaWebApiShare\GrafanaWebApiShare.projitems" Label="Shared"/>
 
-  <Import Project="..\..\..\WebServiceClient\Src\WebServiceClientShare\WebServiceClientShare.projitems" Label="Shared" />
+  <Import Project="..\..\..\WebServiceClient\Src\WebServiceClientShare\WebServiceClientShare.projitems" Label="Shared"/>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\WebServiceClient\Generator\WebServiceGenerator\WebServiceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/> 
+  </ItemGroup>
 
 </Project>
