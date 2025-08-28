@@ -1,6 +1,6 @@
 ﻿namespace GrafanaWebApi;
 
-[Model]
+//[Model]
 public class Health
 {
     internal Health(HealthModel model)
