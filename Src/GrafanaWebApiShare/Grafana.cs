@@ -1,47 +1,29 @@
 ﻿namespace GrafanaWebApi;
 
-public class Grafana : JsonBaseClient
+public class Grafana : JsonService
 {
-    private readonly GrafanaService? service;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Grafana"/> class using a store key and application name.
-    /// </summary>
-    /// <param name="storeKey">The key to retrieve the host and token from the key store.</param>
-    /// <param name="appName">The name of the application using the API.</param>
-    public Grafana(string storeKey, string appName)
-    : this(new Uri(KeyStore.Key(storeKey)?.Host!), KeyStore.Key(storeKey)!.Token!, appName)
+    public Grafana(string storeKey, string appName) : base(storeKey, appName, SourceGenerationContext.Default)
     { }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SnipeIT"/> class using a host URI, token, and application name.
-    /// </summary>
-    /// <param name="host">The base URI of the Snipe-IT API.</param>
-    /// <param name="token">The authentication token for the API.</param>
-    /// <param name="appName">The name of the application using the API.</param>
-    public Grafana(Uri host, string token, string appName)
-    {
-        service = DefineService(new GrafanaService(host, new BearerAuthenticator(token), appName));
-    }
+    public Grafana(Uri host, IAuthenticator? authenticator, string appName) : base(host, authenticator, appName, SourceGenerationContext.Default)
+    { }
 
-    ///// <summary>
-    ///// Disposes the resources used by the <see cref="SnipeIT"/> instance.
-    ///// </summary>
-    //public void Dispose()
-    //{
-    //    if (this.service != null)
-    //    {
-    //        this.service.Dispose();
-    //        this.service = null;
-    //    }
-    //    GC.SuppressFinalize(this);
-    //}
+    protected override string? AuthenticationTestUrl => "api/health";
+
+
+    public override async Task<string?> GetVersionStringAsync(CancellationToken cancellationToken = default)
+    {
+        WebServiceException.ThrowIfNotConnected(client);
+
+        var res = await GetFromJsonAsync<HealthModel>("api/health", cancellationToken);
+        return res?.Version;
+    }
 
     public async Task<Health?> GetHealthAsync(CancellationToken cancellationToken = default)
     {
-        WebServiceException.ThrowIfNullOrNotConnected(this.service);
+        WebServiceException.ThrowIfNotConnected(client);
 
-        var res = await service.GetHealthAsync(cancellationToken);
+        var res = await GetFromJsonAsync<HealthModel>("api/health", cancellationToken);
         return res.CastModel<Health>();
     }
 }
