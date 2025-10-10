@@ -1,8 +1,8 @@
 ﻿namespace GrafanaWebApi;
 
-public class Grafana : IDisposable
+public class Grafana : JsonBaseClient
 {
-    private GrafanaService? service;
+    private readonly GrafanaService? service;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Grafana"/> class using a store key and application name.
@@ -21,21 +21,21 @@ public class Grafana : IDisposable
     /// <param name="appName">The name of the application using the API.</param>
     public Grafana(Uri host, string token, string appName)
     {
-        service = new(host, new BearerAuthenticator(token), appName);
+        service = DefineService(new GrafanaService(host, new BearerAuthenticator(token), appName));
     }
 
-    /// <summary>
-    /// Disposes the resources used by the <see cref="SnipeIT"/> instance.
-    /// </summary>
-    public void Dispose()
-    {
-        if (this.service != null)
-        {
-            this.service.Dispose();
-            this.service = null;
-        }
-        GC.SuppressFinalize(this);
-    }
+    ///// <summary>
+    ///// Disposes the resources used by the <see cref="SnipeIT"/> instance.
+    ///// </summary>
+    //public void Dispose()
+    //{
+    //    if (this.service != null)
+    //    {
+    //        this.service.Dispose();
+    //        this.service = null;
+    //    }
+    //    GC.SuppressFinalize(this);
+    //}
 
     public async Task<Health?> GetHealthAsync(CancellationToken cancellationToken = default)
     {

@@ -5,7 +5,7 @@ namespace GrafanaWebApi.Service;
 
 // http://shm-grafana/api/health
 
-internal class GrafanaService(Uri host, IAuthenticator? authenticator, string appName)
+public class GrafanaService(Uri host, IAuthenticator? authenticator, string appName)
     : JsonService(host, authenticator, appName, SourceGenerationContext.Default)
 {
     private const int limit = 500;
