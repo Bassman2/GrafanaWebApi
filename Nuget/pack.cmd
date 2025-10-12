@@ -1,0 +1,1 @@
+nuget pack GrafanaWebApi.nuspec -properties Configuration=Release
